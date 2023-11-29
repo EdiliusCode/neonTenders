@@ -10,24 +10,7 @@ var neonRegister = neonRegister || {};
 		neonRegister.$steps = neonRegister.$container.find(".form-steps");
 		neonRegister.$steps_list = neonRegister.$steps.find(".step");
 		neonRegister.step = 'step-1'; // current step
-		
-		function disableEnterKey(e)
-		{
-			var key;
 
-			if(window.event)
-				key = window.event.keyCode;     //IE
-			else
-				key = e.which;     //firefox
-
-			if(key == 13)
-				return false;
-			else
-				return true;
-		}
-
-		
-		
 		neonRegister.$container.validate({
 			rules: {
 				name: {

@@ -93,19 +93,19 @@
 						
 						</div>
 						
-						<div class="step" id="step-2">
 						
+						<div class="step" id="step-2">
+
+						{# {% if roles is defined %}
+							{% if roles!= 'ROLE_ADMIN' %} #}
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-addon">
 											<i class="entypo-switch"></i>
 										</div>
-										
 										{{ form_row(registrationForm.role) }}
 									</div>
 								</div>
-						
-						
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">
@@ -126,7 +126,7 @@
 							</div>
 							
 							<div class="form-group">
-								<button  class="btn btn-success btn-block btn-login register">
+								<button type="submit"  class="btn btn-success btn-block btn-login register">
 									<i class="entypo-right-open-mini"></i>
 									Valider la Création de compte
 								</button>

@@ -38,7 +38,6 @@ class RegistrationFormType extends AbstractType
                 'attr'=> [
                     'class'=>'form-control',
                     'placeholder'=>'Votre Adresse',
-                    'max'=> '50'
                 ]
             ])
             ->add('telephone', IntegerType::class, [
@@ -47,7 +46,6 @@ class RegistrationFormType extends AbstractType
                     'class'=>'form-control',
                     'required'=>true,
                     'placeholder'=>'Votre Numéro de Telephone',
-                    'max'=> 13,
                 ]
             ])
             ->add('fullname', TextType::class, [
@@ -56,7 +54,6 @@ class RegistrationFormType extends AbstractType
                     'class'=>'form-control',
                     'required'=>true,
                     'placeholder'=>'Votre Nom Complet',
-                    'max'=> 30,
                 ]
             ])
             
