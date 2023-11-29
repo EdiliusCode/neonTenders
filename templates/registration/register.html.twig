@@ -95,15 +95,16 @@
 						
 						<div class="step" id="step-2">
 						
-							<div class="form-group">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="entypo-switch"></i>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="entypo-switch"></i>
+										</div>
+										
+										{{ form_row(registrationForm.role) }}
 									</div>
-									
-									{{ form_row(registrationForm.role) }}
 								</div>
-							</div>
+						
 						
 							<div class="form-group">
 								<div class="input-group">
@@ -162,6 +163,7 @@
 		
 	</div>
 
+	
 
 	<!-- Bottom scripts (common) -->
 	<script src="assets/js/gsap/TweenMax.min.js"></script>
@@ -181,5 +183,12 @@
 
 	<!-- Demo Settings -->
 	<script src="assets/js/neon-demo.js"></script>
-
+	<script>
+		document.getElementById("form_register").onkeypress = function(e) {
+			var key = e.charCode || e.keyCode || 0;     
+			if (key == 13) {
+			e.preventDefault();
+			}
+		} 
+	</script>
 {% endblock %}

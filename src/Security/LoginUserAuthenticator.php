@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use PHPUnit\Util\Json;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,8 +51,10 @@ class LoginUserAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-        return new JsonResponse(['data'=>'success']);
          //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        //return $this->urlGenerator->generate('edx');
+        return new JsonResponse('success');
+
     }
 
     protected function getLoginUrl(Request $request): string

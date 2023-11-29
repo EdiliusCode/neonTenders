@@ -12,8 +12,14 @@ class AppController extends AbstractController
     #[Route('/',name:'edx')]
     public function redir(): Response
     {
-        return $this->redirectToRoute('app_app');
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_app');
+        }
+        else {
+            return $this->redirectToRoute('app_login');
+        }
     }
+    
     #[Route('/app', name: 'app_app')]
     public function index(): Response
     {

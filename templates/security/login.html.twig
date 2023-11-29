@@ -45,7 +45,7 @@
 						de vous connecter.</p>
 				</div>
 
-				<form method="post" role="form" id="form_login">
+				<form method="post" role="form" id="form_login" action="#">
 
 					<div class="form-group">
 
@@ -54,7 +54,7 @@
 								<i class="entypo-user"></i>
 							</div>
 
-							<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus/>
+							<input type="email" value="{{ last_username }}" placeholder="Votre Email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus/>
 						</div>
 
 					</div>
@@ -66,14 +66,14 @@
 								<i class="entypo-key"></i>
 							</div>
 
-							<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required/>
+							<input type="password" name="password" id="inputPassword" placeholder="Votre mot de passe"  class="form-control" autocomplete="current-password" required/>
 						</div>
 
 					</div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block btn-login">
+						<button type="submit" class="btn btn-primary btn-block btn-login login">
 							<i class="entypo-login"></i>
 							Connexion
 						</button>
@@ -81,7 +81,7 @@
 
 					</form>
 				<div class="login-bottom-links">
-					<a href="#" class="link">Forgot your password?</a>
+					<span><a href="#" class="link">Mot de Passe oublié?</a> </span> &emsp; | &emsp;<span><a href="{{path('app_register')}}" class="link"> Créer Un Compte </a></span>
 					<br/>
 					<a href="#">Edilius</a>
 					-

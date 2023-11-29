@@ -19,7 +19,8 @@ var neonLogin = neonLogin || {};
 		neonLogin.$container.validate({
 			rules: {
 				username: {
-					required: true	
+					required: true,
+					email: true
 				},
 				
 				password: {
@@ -38,88 +39,81 @@ var neonLogin = neonLogin || {};
 				$(element).closest('.input-group').removeClass('validate-has-error');
 			},
 			
-			submitHandler: function(ev)
-			{
-				/* 
-					Updated on v1.1.4
-					Login form now processes the login data, here is the file: data/sample-login-form.php
-				*/
-				
-				$(".login-page").addClass('logging-in'); // This will hide the login form and init the progress bar
-					
-					
-				// Hide Errors
-				$(".form-login-error").slideUp('fast');
-
-				// We will wait till the transition ends				
-				setTimeout(function()
-				{
-					var random_pct = 25 + Math.round(Math.random() * 30);
-					
-					// The form data are subbmitted, we can forward the progress to 70%
-					neonLogin.setPercentage(40 + random_pct);
-											
-					// Send data to the server
-					$.ajax({
-						url: '/login',
-						method: 'POST',
-						data: {
-							username: $("input#username").val(),
-							password: $("input#password").val(),
-							_csrf_token: $("input#_csrf_token").val(),
-						},
-						error: function()
-						{
-							$('.login-page').removeClass('logging-in');
-							neonLogin.resetProgressBar(true);
-							$('.form-login-error').slideUp('normal');
-						},
-						success: function(response)
-						{
-							// Login status [success|invalid]
-							var login_status = response.data;
-															
-							// Form is fully completed, we update the percentage
-							neonLogin.setPercentage(100);
-							
-							
-							// We will give some time for the animation to finish, then execute the following procedures	
-							setTimeout(function()
-							{
-								// If login is valid, we store the 
-							
-								if(login_status == 'success')
-								{
-									// Redirect to login page
-									setTimeout(function()
-									{
-										var redirect_url = '/';
-										
-										if(response.redirect_url && response.redirect_url.length)
-										{
-											redirect_url = response.redirect_url;
-										}
-										
-										window.location.href = redirect_url;
-									}, 400);
-								}
-								else
-								{
-									$(".login-page").removeClass('logging-in');
-									neonLogin.resetProgressBar(true);
-								}
-								
-							}, 1000);
-						}
-					});
-						
-					
-				}, 650);
-			}
+			
 		});
 		
-		
-		
+		$('.login').on('click', function(){
+			$(".login-page").addClass('logging-in'); // This will hide the login form and init the progress bar	
+			// Hide Errors
+			$(".form-login-error").slideUp('fast');
+			// Send data to the server
+			// We will wait till the transition ends				
+			setTimeout(function()
+			{
+				var random_pct = 25 + Math.round(Math.random() * 30);
+				
+				// The form data are subbmitted, we can forward the progress to 70%
+				neonLogin.setPercentage(40 + random_pct);
+					
+				// Send data to the server
+				$.ajax({
+					url: '/login',
+					method: 'post',
+					data: {
+						email: $("email").val(),
+						password: $("password").val(),
+						_csrf_token: $("_csrf_token").val(),
+					},
+					error: function()
+					{
+						$('.login-page').removeClass('logging-in');
+						neonLogin.resetProgressBar(true);
+						$('.form-login-error').slideUp('normal');
+					},
+					success: function(response)
+					{
+						// Login status [success|invalid]
+						var login_status = response.data;
+														
+						// Form is fully completed, we update the percentage
+						neonLogin.setPercentage(100);
+						
+						
+						// We will give some time for the animation to finish, then execute the following procedures	
+						setTimeout(function()
+						{
+							// If login is valid, we store the 
+						
+							if(login_status == 'success')
+							{
+								// Redirect to login page
+								setTimeout(function()
+								{
+									var redirect_url = '/';
+									
+									if(response.redirect_url && response.redirect_url.length)
+									{
+										redirect_url = response.redirect_url;
+									}
+									
+									window.location.href = redirect_url;
+								}, 400);
+							}
+							else
+							{
+								$(".login-page").removeClass('logging-in');
+								neonLogin.resetProgressBar(true);
+							}
+							
+						}, 1000);
+					}
+				});
+					
+				
+			}, 650);
+			
+				
+		});
 		
 		// Lockscreen & Validation
 		var is_lockscreen = $(".login-page").hasClass('is-lockscreen');
@@ -187,11 +181,6 @@ var neonLogin = neonLogin || {};
 				}
 			});
 		}
-		
-		
-		
-		
-		
 		
 		// Login Form Setup
 		neonLogin.$body = $(".login-page");

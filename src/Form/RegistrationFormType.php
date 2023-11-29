@@ -59,18 +59,22 @@ class RegistrationFormType extends AbstractType
             
             ->add('role', EntityType::class, [
                 'label'=> false,
+                'empty_data'=>'ROLE_USER',
                 'class'=> Role::class,
                 'choice_label'=> 'description',
                 'choice_value'=>'role_name',
                 'attr'=> [
-                    'class'=> 'form-control'
+                    'class'=> 'form-control',
                 ]
             ])
             ->add('plainPassword', PasswordType::class, [
                 'label'=> false,
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password','class'=>'form-control','required'=>true,
-                'placeholder'=>'Votre Mot  de Passe'],
+                'attr' => [
+                            'autocomplete' => 'new-password',
+                            'class'=>'form-control',
+                            'required'=>true,
+                            'placeholder'=>'Votre Mot  de Passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir un mot de passe',
