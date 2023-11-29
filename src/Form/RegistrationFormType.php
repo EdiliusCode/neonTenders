@@ -37,7 +37,8 @@ class RegistrationFormType extends AbstractType
                 'label'=>false,
                 'attr'=> [
                     'class'=>'form-control',
-                    'placeholder'=>'Votre Adresse'
+                    'placeholder'=>'Votre Adresse',
+                    'max'=> '50'
                 ]
             ])
             ->add('telephone', IntegerType::class, [
@@ -45,7 +46,8 @@ class RegistrationFormType extends AbstractType
                 'attr'=> [
                     'class'=>'form-control',
                     'required'=>true,
-                    'placeholder'=>'Votre Numéro de Telephone'
+                    'placeholder'=>'Votre Numéro de Telephone',
+                    'max'=> 13,
                 ]
             ])
             ->add('fullname', TextType::class, [
@@ -53,7 +55,8 @@ class RegistrationFormType extends AbstractType
                 'attr'=> [
                     'class'=>'form-control',
                     'required'=>true,
-                    'placeholder'=>'Votre Nom Complet'
+                    'placeholder'=>'Votre Nom Complet',
+                    'max'=> 30,
                 ]
             ])
             
@@ -80,7 +83,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Veuillez saisir un mot de passe',
                     ]),
                     new Length([
-                        'min' => 5,
+                        'min' => 4,
                         'minMessage' => 'Le mot de passe doit avoir au moins {{ limit }} caracteres',
                         'max' => 4096,
                     ]),
