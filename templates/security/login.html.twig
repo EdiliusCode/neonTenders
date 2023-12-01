@@ -39,13 +39,13 @@
 			<div class="login-content">
 
 				<div class="form-login-error">
-					<h3>Infomation de connexion Erroné</h3>
+					<h3>Informations de connexion Erronés</h3>
 					<p>Veuillez
 						<strong>reéssayer</strong>
 						de vous connecter.</p>
 				</div>
 
-				<form method="post" role="form" id="form_login" action="#">
+				<form method="post" role="form" id="form_login"  onsubmit="return false;">
 
 					<div class="form-group">
 
@@ -54,7 +54,7 @@
 								<i class="entypo-user"></i>
 							</div>
 
-							<input type="email" value="{{ last_username }}" placeholder="Votre Email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus/>
+							<input type="email" value="{{ last_username }}" placeholder="Votre Email" name="email" id="email" class="form-control" autocomplete="email" required autofocus/>
 						</div>
 
 					</div>
@@ -66,19 +66,21 @@
 								<i class="entypo-key"></i>
 							</div>
 
-							<input type="password" name="password" id="inputPassword" placeholder="Votre mot de passe"  class="form-control" autocomplete="current-password" required/>
+							<input type="password" name="password" id="password" placeholder="Votre mot de passe"  class="form-control" autocomplete="current-password" required/>
 						</div>
 
 					</div>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						
+                    <input type="hidden" name="_csrf_token" id="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block btn-login login">
+						<button class="btn btn-primary btn-block btn-login login">
 							<i class="entypo-login"></i>
 							Connexion
 						</button>
 					</div>
-
+						<label>Se Rappeler de moi</label>
+							<input  type="checkbox" name="_remember_me" >
 					</form>
 				<div class="login-bottom-links">
 					<span><a href="#" class="link">Mot de Passe oublié?</a> </span> &emsp; | &emsp;<span><a href="{{path('app_register')}}" class="link"> Créer Un Compte </a></span>
@@ -91,6 +93,21 @@
 		</div>
 	</div>
 
+	<!-- Bottom scripts (common) -->
+	<script src="assets/js/gsap/TweenMax.min.js"></script>
+	<script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script src="assets/js/bootstrap.js"></script>
+	<script src="assets/js/joinable.js"></script>
+	<script src="assets/js/resizeable.js"></script>
+	<script src="assets/js/neon-api.js"></script>
 	<script src="assets/js/jquery.validate.min.js"></script>
 	<script src="assets/js/neon-login.js"></script>
+
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="assets/js/neon-custom.js"></script>
+
+
+	<!-- Demo Settings -->
+	<script src="assets/js/neon-demo.js"></script>
 {% endblock %}

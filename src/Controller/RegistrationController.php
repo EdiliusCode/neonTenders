@@ -16,14 +16,14 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-        
+       
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         //pause the request for some seconds
-        //sleep for 8 seconds
-        sleep(6);
+        //sleep for 5 seconds
+        sleep(5);
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -39,8 +39,11 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
+        $permission = $this->getUser()->getRoles(0);
+
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'roles'=> $permission
         ]);
     }
 }

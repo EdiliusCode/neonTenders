@@ -95,17 +95,31 @@
 						
 						
 						<div class="step" id="step-2">
-
-						{# {% if roles is defined %}
-							{% if roles!= 'ROLE_ADMIN' %} #}
-								<div class="form-group">
-									<div class="input-group">
-										<div class="input-group-addon">
-											<i class="entypo-switch"></i>
+								{% if roles is defined %}
+									{% if roles[0] == 'ROLE_ADMIN' %}
+										<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="entypo-home"></i>
+											</div>
+											{{form_row(registrationForm.role)}}
 										</div>
-										{{ form_row(registrationForm.role) }}
 									</div>
-								</div>
+									{% else %}
+										<div class="form-group hide">
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="entypo-home"></i>
+											</div>
+											{{ form_row(registrationForm.role, {'attr': {'disabled':true}}) }}
+										</div>
+									</div>
+									<script>
+									 	$(".hide").hide();
+									</script>
+									{% endif %}
+								{% endif %}
+						 
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">

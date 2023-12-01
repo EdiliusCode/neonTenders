@@ -13,8 +13,6 @@ var neonLogin = neonLogin || {};
 	$(document).ready(function()
 	{
 		neonLogin.$container = $("#form_login");
-		
-		
 		// Login Form & Validation
 		neonLogin.$container.validate({
 			rules: {
@@ -22,27 +20,21 @@ var neonLogin = neonLogin || {};
 					required: true,
 					email: true
 				},
-				
 				password: {
 					required: true
 				},
-				
 			},
-			
 			highlight: function(element){
 				$(element).closest('.input-group').addClass('validate-has-error');
 			},
-			
-			
 			unhighlight: function(element)
 			{
 				$(element).closest('.input-group').removeClass('validate-has-error');
 			},
-			
-			
 		});
 		
 		$('.login').on('click', function(){
+			
 			$(".login-page").addClass('logging-in'); // This will hide the login form and init the progress bar	
 			// Hide Errors
 			$(".form-login-error").slideUp('fast');
@@ -60,56 +52,38 @@ var neonLogin = neonLogin || {};
 					url: '/login',
 					method: 'post',
 					data: {
-						email: $("email").val(),
-						password: $("password").val(),
-						_csrf_token: $("_csrf_token").val(),
+						email: $("#email").val(),
+						password: $("#password").val(),
+						_csrf_token: $("#_csrf_token").val(),
 					},
-					error: function()
+					error: function(err)
 					{
 						$('.login-page').removeClass('logging-in');
 						neonLogin.resetProgressBar(true);
 						$('.form-login-error').slideUp('normal');
+						console.log("erreur d'envoi");
 					},
 					success: function(response)
 					{
-						// Login status [success|invalid]
+						 // Login status [success|invalid]
 						var login_status = response.data;
-														
+						console.log(response);
+						console.log(login_status);
 						// Form is fully completed, we update the percentage
 						neonLogin.setPercentage(100);
-						
-						
-						// We will give some time for the animation to finish, then execute the following procedures	
-						setTimeout(function()
-						{
-							// If login is valid, we store the 
-						
-							if(login_status == 'success')
+							if(login_status == 'valide')
 							{
-								// Redirect to login page
-								setTimeout(function()
-								{
-									var redirect_url = '/';
-									
-									if(response.redirect_url && response.redirect_url.length)
-									{
-										redirect_url = response.redirect_url;
-									}
-									
-									window.location.href = redirect_url;
-								}, 400);
+									var newUrl = '/';
+									window.location.replace(newUrl);
 							}
 							else
 							{
-								$(".login-page").removeClass('logging-in');
+								 $(".login-page").removeClass('logging-in');
 								neonLogin.resetProgressBar(true);
-							}
-							
-						}, 1000);
+								console.log("erreur de connexion")
+							} 
 					}
 				});
-					
-				
 			}, 650);
 			
 				

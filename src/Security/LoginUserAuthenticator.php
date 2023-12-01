@@ -49,12 +49,7 @@ class LoginUserAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
-        // For example:
-         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-        //return $this->urlGenerator->generate('edx');
-        return new JsonResponse('success');
-
+        return new JsonResponse(['data'=>'valide']);
     }
 
     protected function getLoginUrl(Request $request): string
